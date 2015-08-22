@@ -1,0 +1,8 @@
+/**
+ * 
+ */
+/**
+ * @author kawabatahiroto
+ *
+ */
+package characters;
