@@ -11,7 +11,11 @@ public class Character {
 	public double spd;    // 速さ
 	public double intel;  // 賢さ
 	
-	public Character(String name, double hpMax, double mpMax, double atk, double def, double spd, double intel){
+	// コンストラクタ
+	public Character(
+			String name, double hpMax, double mpMax,
+			double atk, double def, double spd, double intel
+			) {
 		this.name  = name;
 		this.hpMax = hpMax;
 		this.hp    = hpMax;
@@ -22,12 +26,33 @@ public class Character {
 		this.spd   = spd;
 		this.intel = intel;
 	}
+	// 引数がないときのコンストラクタ（オーバーロード）
+	public Character() {
+		this("No name",10,10,1,1,1,1);
+	}
 	
+	public static int money = 0;
+	
+	// 攻撃
 	public void attack (Character that) {
 		double dmg = (this.atk / that.def) * 10;
-		that.hp -= dmg;
+		if (dmg > that.hp) {
+			that.hp = 0;
+		}else{
+			that.hp -= dmg;
+		}
 		System.out.println(
 				this.name + "は" + that.name +
 				"に" + String.valueOf(dmg) + "ダメージを与えた！");
+		
+		// 死亡判定
+		if (that.hp == 0) {
+			System.out.println(that.name + "を倒した");
+		}
+	}
+	
+	// 全回復
+	public void fullcare() {
+		this.hp = this.hpMax;
 	}
 }

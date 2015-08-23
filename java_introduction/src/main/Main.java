@@ -11,12 +11,23 @@ public class Main {
 		System.out.println(taro.hp);
 		System.out.println(taro.atk);
 		
-		Enemy slime = new Enemy("スライム",500,250,50,50,50,50);
+		Enemy slime = new Enemy("スライム",50,25,5,5,5,5);
 		System.out.println(slime.hp);
-		System.out.println(slime.atk);
+		
+		Enemy slimeBes = new Enemy("スライムベス",100,50,20,20,20,20);
+		System.out.println(slimeBes.hp);
+		
 		taro.attack(slime);
 		System.out.println(slime.hp);
-		System.out.println(slime.atk);
+		
+		taro.attack(slimeBes);
+		System.out.println(slimeBes.hp);
+		
+		System.out.println(Character.money);
+		taro.money += 100;
+		System.out.println(Character.money);
+		slime.money += 10;
+		System.out.println(Character.money);
 		
 	}
 }
