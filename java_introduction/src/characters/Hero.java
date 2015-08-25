@@ -10,12 +10,12 @@ public class Hero extends Character{
 	}
 	
 	// 何も書かなければ初期値0
-	private int money;
-	public int getMoney() {
-		return this.money;
+	private static int money;
+	public static int getMoney() {
+		return Hero.money;
 	}
-	public void setMoney(int money) {
-		this.money = money;
+	public static void setMoney(int money) {
+		Hero.money = money;
 	}
 	
 }

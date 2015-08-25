@@ -1,37 +1,101 @@
 package characters;
 
 public class Character {
-	public String name;   // キャラクター名
-	public double hpMax;  // Max HP
-	public double hp;     // HP
-	public double mpMax;  // Max MP
-	public double mp;     // MP
-	public double atk;    // 攻撃力
-	public double def;    // 守備力
-	public double spd;    // 速さ
-	public double intel;  // 賢さ
+	private String name;   // キャラクター名
+	private double hpMax;  // Max HP
+	private double hp;     // HP
+	private double mpMax;  // Max MP
+	private double mp;     // MP
+	private double atk;    // 攻撃力
+	private double def;    // 守備力
+	private double spd;    // 速さ
+	private double intel;  // 賢さ
 	
 	// コンストラクタ
 	public Character(
 			String name, double hpMax, double mpMax,
 			double atk, double def, double spd, double intel
 			) {
-		this.name  = name;
-		this.hpMax = hpMax;
-		this.hp    = hpMax;
-		this.mpMax = mpMax;
-		this.mp    = mpMax;
-		this.atk   = atk;
-		this.def   = def;
-		this.spd   = spd;
-		this.intel = intel;
+		this.setName(name);
+		this.setHpMax(hpMax);
+		this.setHp(hpMax);
+		this.setMpMax(mpMax);
+		this.setMp(mpMax);
+		this.setAtk(atk);
+		this.setDef(def);
+		this.setSpd(spd);
+		this.setIntel(intel);
 	}
 	// 引数がないときのコンストラクタ（オーバーロード）
 	public Character() {
 		this("No name",10,10,1,1,1,1);
 	}
 	
-	public static int money = 0;
+	// getter
+	public double getHpMax() {
+		return this.hpMax;
+	}
+	public double getHp() {
+		return this.hp;
+	}
+	public double getMpMax() {
+		return this.mpMax;
+	}
+	public double getMp() {
+		return this.mp;
+	}
+	public double getAtk() {
+		return this.atk;
+	}
+	public double getDef() {
+		return this.def;
+	}
+	public double getSpd() {
+		return this.spd;
+	}
+	public double getIntel() {
+		return this.intel;
+	}
+	public String getName() {
+		return this.name;
+	}
+	
+	// setter
+	public void setName(String name) {
+		if(name == null) {
+			throw new IllegalArgumentException("名前が空です。");
+		}
+		if(name.length() > 32) {
+			throw new IllegalArgumentException("名前が長すぎます：" + name);
+		}
+		this.name = name;
+	}
+	public void setHpMax(double hpMax) {
+		this.hpMax = hpMax;
+	}
+	public void setHp(double hp) {
+		this.hp = hp;
+	}
+	public void setMpMax(double mpMax) {
+		this.mpMax= mpMax;
+	}
+	public void setMp(double mp) {
+		this.mp = mp;
+	}
+	public void setAtk(double atk) {
+		this.atk = atk;
+	}
+	public void setDef(double def) {
+		this.def = def;
+	}
+	public void setSpd(double spd) {
+		this.spd = spd;
+	}
+	public void setIntel(double intel) {
+		this.intel = intel;
+	}
+	
+	
 	
 	// 攻撃
 	public void attack (Character that) {
