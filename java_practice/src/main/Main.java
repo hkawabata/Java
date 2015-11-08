@@ -1,10 +1,10 @@
 package main;
 
-import algorithm.Combination;
+import algorithm.Horner;
 
 public class Main {
 	public static void main (String[] args) {
-		Combination.combinationTest();
-		//System.out.println(Combination.combinationRecursion(10, 3));
+		double a[] = {1,2,3};
+		System.out.println(Horner.polynomialHorner(a, 10));
 	}
 }
