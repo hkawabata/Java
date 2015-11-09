@@ -1,9 +1,11 @@
 package main;
 
-import algorithm.Horner;
+import algorithm.Eucledean;
+import algorithm.RandomMethods;
 
 public class Main {
 	public static void main (String[] args) {
-		Horner.polinomialTest();
+		//System.out.println();
+		RandomMethods.gaussianRandomTest();
 	}
 }
