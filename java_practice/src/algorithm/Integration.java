@@ -97,7 +97,7 @@ public class Integration {
 		double dx;
 		double result;
 		double ans = Math.sin(top) - Math.cos(top) * top;
-		int n = 7;
+		int n = 8;
 		
 		// 台形則
 		System.out.println("### Trapezoid method");
