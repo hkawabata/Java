@@ -1,7 +1,7 @@
 package algorithm;
 
 /*
- *  乱数を使ったメソッド
+ * 乱数を使ったメソッド
  */
 
 public class RandomMethods {
@@ -23,7 +23,8 @@ public class RandomMethods {
 	// 正規分布型の乱数を生成する
 	static double gauss_pi = Math.asin(1.0) * 2;
 	static double gauss_sigma = 1.0;
-	static double limit_factor = 3.0;
+	// 乱数生成の範囲（中心から左右に gauss_sigma の何倍）
+	static double limit_factor = 4.0;
 	public static double gaussian (double x) {
 		return Math.exp(-x*x/(2*gauss_sigma*gauss_sigma))
 				/ (Math.sqrt(2*gauss_pi) * gauss_sigma);
@@ -45,7 +46,7 @@ public class RandomMethods {
 	}
 	// テストコード
 	public static void gaussianRandomTest () {
-		int division = 40;
+		int division = 50;
 		int trial_time = 80000;
 		int arr[] = new int[division];
 		for (int i=0; i<division; i++) arr[i] = 0;

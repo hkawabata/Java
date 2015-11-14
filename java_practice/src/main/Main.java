@@ -1,11 +1,11 @@
 package main;
 
-import algorithm.Eucledean;
+import algorithm.Integration;
 import algorithm.RandomMethods;
 
 public class Main {
 	public static void main (String[] args) {
-		//System.out.println();
-		RandomMethods.gaussianRandomTest();
+		Integration.integrationTest();
+		//RandomMethods.gaussianRandomTest();
 	}
 }

@@ -1,7 +1,7 @@
 package algorithm;
 
 public class Eucledean {
-	// greatest common divisor （最大公約数）を計算する
+	// ユークリッド互除法により、greatest common divisor （最大公約数）を計算する
 	public static int gcd (int m, int n) {
 		int max = Math.max(m, n);
 		int min = Math.min(m, n);
