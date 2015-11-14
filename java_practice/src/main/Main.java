@@ -6,6 +6,6 @@ import algorithm.RandomMethods;
 public class Main {
 	public static void main (String[] args) {
 		Integration.integrationTest();
-		//RandomMethods.gaussianRandomTest();
+		RandomMethods.gaussianRandomTest();
 	}
 }

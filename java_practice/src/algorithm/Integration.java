@@ -9,7 +9,7 @@ public class Integration {
 
 	// 被積分関数
 	public static double function (double x) {
-		return x*x;
+		return Math.sin(x) * x;
 		//return 1;
 	}
 	
@@ -93,32 +93,34 @@ public class Integration {
 	 * テストコード
 	 */
 	public static void integrationTest () {
-		double bottom = -3, top = 3;
+		double bottom = 0, top = 4;
 		double dx;
 		double result;
+		double ans = Math.sin(top) - Math.cos(top) * top;
+		int n = 7;
 		
 		// 台形則
 		System.out.println("### Trapezoid method");
-		for (int i=0; i<9; i++) {
+		for (int i=0; i<n; i++) {
 			dx = Math.pow(0.1, i);
 			result = integrationTrapezoid(bottom, top, dx);
-			System.out.println(dx + "\t" + result + "\t" + Math.abs(result-18));
+			System.out.println(dx + "\t" + result + "\t" + Math.abs(result-ans));
 		}
 		
 		// 中点則
 		System.out.println("### MiddlePoint method");
-		for (int i=0; i<9; i++) {
+		for (int i=0; i<n; i++) {
 			dx = Math.pow(0.1, i);
 			result = integrationMiddlePoint(bottom, top, dx);
-			System.out.println(dx + "\t" + result + "\t" + Math.abs(result-18));
+			System.out.println(dx + "\t" + result + "\t" + Math.abs(result-ans));
 		}
 		
 		// シンプソン則
 		System.out.println("### Simpson's method");
-		for (int i=0; i<9; i++) {
+		for (int i=0; i<n; i++) {
 			dx = Math.pow(0.1, i);
 			result = integrationSimpson(bottom, top, dx);
-			System.out.println(dx + "\t" + result + "\t" + Math.abs(result-18));
+			System.out.println(dx + "\t" + result + "\t" + Math.abs(result-ans));
 		}
 	}
 }
