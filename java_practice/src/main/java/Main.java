@@ -1,5 +1,3 @@
-package main;
-
 import algorithm.LongNumber;
 import algorithm.RandomMethods;
 

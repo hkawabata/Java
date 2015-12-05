@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author kawabatahiroto
- *
- */
-package main;
