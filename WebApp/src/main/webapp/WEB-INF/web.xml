@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="serv" version="3.0">
+
+    <servlet>
+        <servlet-name>MyApplication</servlet-name>
+        <servlet-class>jetty.sample.MyApplication</servlet-class>
+    </servlet>
+
+    <!-- サーブレットクラスのアノテーションを使い
+    @WebServlet(urlPatterns = "/fuga") のように設定しても OK
+    （アノテーションとは別の url を指定した場合、どちらも動く。）-->
+    <servlet-mapping>
+        <servlet-name>MyApplication</servlet-name>
+        <url-pattern>/hoge</url-pattern>
+    </servlet-mapping>
+
+</web-app>
