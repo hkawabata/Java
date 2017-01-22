@@ -1,9 +1,6 @@
 package jp.hkawabata.log4j;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.apache.log4j.*;
 
 /**
  * Apache Log4J のトライアル
@@ -12,16 +9,12 @@ import org.apache.log4j.PatternLayout;
  */
 public class Log4jTrial {
     public static void main(String[] args) {
-        PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern("%-4r [%t] %-5p %c %x - %m%n");
+        Layout layout = new PatternLayout("%-4r [%t] %-5p %c %x - %m%n");
 
-        ConsoleAppender appender = new ConsoleAppender();
+        Appender appender = new ConsoleAppender(layout, ConsoleAppender.SYSTEM_OUT);
         appender.setLayout(layout);
-        appender.setTarget(ConsoleAppender.SYSTEM_OUT);
-        appender.activateOptions();
 
         Logger logger = Logger.getLogger(Log4jTrial.class);
-        // WARN 以上なら出力する
         logger.setLevel(Level.WARN);
         logger.addAppender(appender);
 
