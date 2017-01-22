@@ -1,4 +1,4 @@
-package jp.hkawabat.algorithm;
+package jp.hkawabata.algorithm;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

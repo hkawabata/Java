@@ -1,4 +1,4 @@
-package jp.hkawabat.algorithm;
+package jp.hkawabata.algorithm;
 
 /*
  * コンビネーション nCr を計算する。

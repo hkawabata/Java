@@ -1,4 +1,4 @@
-package jp.hkawabat.algorithm;
+package jp.hkawabata.algorithm;
 
 public class Eucledean {
 	// ユークリッド互除法により、greatest common divisor （最大公約数）を計算する

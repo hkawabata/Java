@@ -1,4 +1,4 @@
-package jp.hkawabat.algorithm;
+package jp.hkawabata.algorithm;
 
 public class Main {
 	public static void main (String[] args) {

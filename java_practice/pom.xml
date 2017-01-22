@@ -41,7 +41,7 @@
           <archive>
             <manifest>
               <!-- main クラスの FQDN -->
-              <mainClass>jp.hkawabat.http.HttpClientTrial</mainClass>
+              <mainClass>jp.hkawabata.http.HttpClientTrial</mainClass>
             </manifest>
           </archive>
         </configuration>

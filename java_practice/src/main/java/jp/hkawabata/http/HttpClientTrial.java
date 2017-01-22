@@ -1,4 +1,4 @@
-package jp.hkawabat.http;
+package jp.hkawabata.http;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -13,7 +13,6 @@ import org.apache.http.message.BasicHeader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;

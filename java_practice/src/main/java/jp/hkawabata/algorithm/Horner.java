@@ -1,4 +1,4 @@
-package jp.hkawabat.algorithm;
+package jp.hkawabata.algorithm;
 
 /* 
  * 多項式を効率的に計算する Horner の手法を実装
