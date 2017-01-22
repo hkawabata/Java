@@ -4,11 +4,20 @@
   <artifactId>java_practice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
+    <!-- JUnit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.8.1</version>
     </dependency>
+    <!-- JUnit -->
+    <!-- http -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.2</version>
+    </dependency>
+    <!-- http -->
   </dependencies>
   <build>
     <plugins>
@@ -19,6 +28,31 @@
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+      <!-- Fat-jar（実行可能 jar）を作るための設定 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <!-- main クラスの FQDN -->
+              <mainClass>jp.hkawabat.http.HttpClientTrial</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
