@@ -1,4 +1,4 @@
-package algorithm;
+package jp.hkawabat.algorithm;
 
 /*
  * 乱数を使ったメソッド

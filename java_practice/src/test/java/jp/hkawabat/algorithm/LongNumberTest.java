@@ -1,9 +1,7 @@
-package algorithm;
+package jp.hkawabat.algorithm;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-
-import algorithm.LongNumber;
 
 public class LongNumberTest {
 

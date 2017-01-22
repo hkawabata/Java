@@ -1,4 +1,4 @@
-package algorithm;
+package jp.hkawabat.algorithm;
 
 public class LongNumber {
 	

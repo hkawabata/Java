@@ -5,4 +5,4 @@
  * @author kawabatahiroto
  *
  */
-package algorithm;
+package jp.hkawabat.algorithm;

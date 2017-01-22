@@ -1,4 +1,4 @@
-package algorithm;
+package jp.hkawabat.algorithm;
 
 /*
  * 積分を以下の幾つかの方法で計算する。

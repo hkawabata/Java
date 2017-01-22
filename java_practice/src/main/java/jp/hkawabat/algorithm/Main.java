@@ -1,5 +1,4 @@
-import algorithm.LongNumber;
-import algorithm.RandomMethods;
+package jp.hkawabat.algorithm;
 
 public class Main {
 	public static void main (String[] args) {
