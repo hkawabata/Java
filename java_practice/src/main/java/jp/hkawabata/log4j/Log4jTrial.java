@@ -1,6 +1,9 @@
 package jp.hkawabata.log4j;
 
-import org.apache.log4j.*;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 /**
  * Apache Log4J のトライアル
