@@ -28,14 +28,12 @@ import java.util.Locale;
 public class HttpClientTrial {
     public static void main(String[] args) {
         try {
-            RequestConfig confDefault = RequestConfig.DEFAULT;
             RequestConfig confCustom = RequestConfig.custom()
                     .setRedirectsEnabled(true)
                     .build();
             List<Header> headers = new ArrayList<>();
             headers.add(new BasicHeader("Accept-Charset","utf-8"));
             headers.add(new BasicHeader("Accept-Language","ja, en;q=0.8"));
-
             URI uri = new URIBuilder()
                     .setScheme("http")
                     .setHost("www.google.com")
@@ -43,13 +41,11 @@ public class HttpClientTrial {
                     .setParameter("q", "Apache HttpClient")
                     .build();
             HttpGet get = new HttpGet(uri);
-
-            HttpClient httpClientDefault = HttpClientBuilder.create()
-                    .setDefaultRequestConfig(confDefault)
-                    .setDefaultHeaders(headers).build();
             HttpClient httpClientCustom = HttpClientBuilder.create()
                     .setDefaultRequestConfig(confCustom)
                     .setDefaultHeaders(headers).build();
+
+            HttpClient httpClientDefault = getDefaultClient();
 
             HttpResponse responseDefault = httpClientDefault.execute(get);
             HttpResponse responseCustom = httpClientCustom.execute(get);
@@ -62,6 +58,14 @@ public class HttpClientTrial {
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static HttpClient getDefaultClient() {
+        RequestConfig confDefault = RequestConfig.DEFAULT;
+        List<Header> headers = new ArrayList<>();
+        return HttpClientBuilder.create()
+                .setDefaultRequestConfig(confDefault)
+                .setDefaultHeaders(headers).build();
     }
 
     private static void func(HttpResponse response) {
