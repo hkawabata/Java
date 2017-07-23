@@ -50,9 +50,13 @@ public class SampleFrame extends JFrame implements ActionListener {
         SamplePanel2 pEast = new SamplePanel2(btnsEast);
         SamplePanel4 pCenter = new SamplePanel4();
 
+        // 描画パネル
+        SamplePanel5 drawPanel = new SamplePanel5();
+
         // フレームにボタン・パネルを配置
         //getContentPane().add(btnWest, BorderLayout.WEST);  // 古い書き方
-        add(btnWest, BorderLayout.WEST);                     // 新しい書き方
+        //add(btnWest, BorderLayout.WEST);                     // 新しい書き方
+        add(drawPanel, BorderLayout.WEST);
         add(pCenter, BorderLayout.CENTER);
         add(pEast, BorderLayout.EAST);
         add(pNorth, BorderLayout.NORTH);
