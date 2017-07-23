@@ -20,9 +20,9 @@ public class SampleFrame extends JFrame implements ActionListener {
         // 位置（画面左上隅からの座標）とサイズを決定
         //setBounds(200, 100, 700, 300);
         // サイズを決定
-        setSize(600, 600);
-        setMinimumSize(new Dimension(400, 400));
-        setMaximumSize(new Dimension(800, 800));
+        setSize(1000, 600);
+        setMinimumSize(new Dimension(600, 400));
+        setMaximumSize(new Dimension(1400, 800));
         // 画面中央に配置
         setLocationRelativeTo(null);
 
@@ -31,8 +31,6 @@ public class SampleFrame extends JFrame implements ActionListener {
         // ボタン作成
         JButton btnWest = new JButton("West");
         btnWest.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
-        JButton btnCenter = new JButton("Center");
-        btnCenter.setFont(new Font("Century", Font.ITALIC, 18));
         JButton[] btnsEast = new JButton[]{
                 new JButton("East_1"),
                 new JButton("East_2"),
@@ -50,11 +48,12 @@ public class SampleFrame extends JFrame implements ActionListener {
         SamplePanel3 pNorth = new SamplePanel3();
         SamplePanel1 pSouth = new SamplePanel1(btnsSouth, Color.BLUE);
         SamplePanel2 pEast = new SamplePanel2(btnsEast);
+        SamplePanel4 pCenter = new SamplePanel4();
 
         // フレームにボタン・パネルを配置
         //getContentPane().add(btnWest, BorderLayout.WEST);  // 古い書き方
         add(btnWest, BorderLayout.WEST);                     // 新しい書き方
-        add(btnCenter, BorderLayout.CENTER);
+        add(pCenter, BorderLayout.CENTER);
         add(pEast, BorderLayout.EAST);
         add(pNorth, BorderLayout.NORTH);
         add(pSouth, BorderLayout.SOUTH);
