@@ -20,7 +20,9 @@ public class SampleFrame extends JFrame implements ActionListener {
         // 位置（画面左上隅からの座標）とサイズを決定
         //setBounds(200, 100, 700, 300);
         // サイズを決定
-        setSize(500, 500);
+        setSize(600, 600);
+        setMinimumSize(new Dimension(400, 400));
+        setMaximumSize(new Dimension(800, 800));
         // 画面中央に配置
         setLocationRelativeTo(null);
 
@@ -45,9 +47,9 @@ public class SampleFrame extends JFrame implements ActionListener {
         btnWest.addActionListener(this);
 
         // パネル作成
-        SamplePanel2 pNorth = new SamplePanel2();
+        SamplePanel3 pNorth = new SamplePanel3();
         SamplePanel1 pSouth = new SamplePanel1(btnsSouth, Color.BLUE);
-        SamplePanel1 pEast = new SamplePanel1(btnsEast);
+        SamplePanel2 pEast = new SamplePanel2(btnsEast);
 
         // フレームにボタン・パネルを配置
         //getContentPane().add(btnWest, BorderLayout.WEST);  // 古い書き方
@@ -56,6 +58,7 @@ public class SampleFrame extends JFrame implements ActionListener {
         add(pEast, BorderLayout.EAST);
         add(pNorth, BorderLayout.NORTH);
         add(pSouth, BorderLayout.SOUTH);
+
     }
 
     public void actionPerformed(ActionEvent e) {
