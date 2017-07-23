@@ -15,6 +15,12 @@ public class SamplePanel4 extends JPanel implements ActionListener {
     JButton btn;
     JTextArea outputTextArea;
     JScrollPane outputScrollPane;
+    JCheckBox checkBox;
+    JRadioButton radioBtn1;
+    JRadioButton radioBtn2;
+    JRadioButton radioBtn3;
+    JPanel radioPanel;
+    ButtonGroup radioBtns;
 
     SamplePanel4() {
         setBackground(Color.PINK);
@@ -40,9 +46,28 @@ public class SamplePanel4 extends JPanel implements ActionListener {
         outputScrollPane = new JScrollPane(outputTextArea);
         outputScrollPane.setPreferredSize(new Dimension(300, 200));
 
+        // チェックボックス
+        checkBox = new JCheckBox("send me e-mail");
+        checkBox.setSelected(true);
+
+        // ラジオボタン
+        radioBtn1 = new JRadioButton("apple");
+        radioBtn2 = new JRadioButton("orange");
+        radioBtn3 = new JRadioButton("grape");
+        radioPanel = new JPanel();
+        radioPanel.add(radioBtn1);
+        radioPanel.add(radioBtn2);
+        radioPanel.add(radioBtn3);
+        radioBtns = new ButtonGroup();  // グループ内のラジオボタンは1つしか選択できない
+        radioBtns.add(radioBtn1);
+        radioBtns.add(radioBtn2);
+        radioBtns.add(radioBtn3);
+
         add(scrollPane);
         add(btn);
         add(outputScrollPane);
+        add(checkBox);
+        add(radioPanel);
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -34,8 +34,16 @@ public class SampleFrame extends JFrame implements ActionListener {
         JButton[] btnsEast = new JButton[]{
                 new JButton("East_1"),
                 new JButton("East_2"),
-                new JButton("East_3")
+                new JButton("East_3"),
+                new JButton("East_4"),
+                new JButton("East_5"),
+                new JButton("East_6")
         };
+        btnsEast[1].setContentAreaFilled(false);
+        btnsEast[2].setContentAreaFilled(false);
+        btnsEast[2].setBorderPainted(false);
+        btnsEast[3].setForeground(Color.RED);
+        btnsEast[4].setMnemonic(KeyEvent.VK_N);  // Alt (Ctrl + Option) + N でボタンが押される
         JButton[] btnsSouth = new JButton[]{
                 new JButton("South_1"),
                 new JButton("South_2")
