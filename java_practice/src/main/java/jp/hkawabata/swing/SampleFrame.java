@@ -30,7 +30,7 @@ public class SampleFrame extends JFrame implements ActionListener {
 
         // ボタン作成
         JButton btnWest = new JButton("West");
-        btnWest.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
+        //btnWest.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
         JButton[] btnsEast = new JButton[]{
                 new JButton("East_1"),
                 new JButton("East_2"),
@@ -50,30 +50,77 @@ public class SampleFrame extends JFrame implements ActionListener {
         };
 
         // ボタンにイベントリスナーを登録
-        btnWest.addActionListener(this);
+        //btnWest.addActionListener(this);
 
         // パネル作成
         SamplePanel3 pNorth = new SamplePanel3();
         SamplePanel1 pSouth = new SamplePanel1(btnsSouth, Color.BLUE);
         SamplePanel2 pEast = new SamplePanel2(btnsEast);
         SamplePanel4 pCenter = new SamplePanel4();
+        SamplePanel5 pWest = new SamplePanel5();
 
-        // 描画パネル
-        SamplePanel5 drawPanel = new SamplePanel5();
+        // メニューバー作成
+        JMenuBar menuBar = generateMenuBar();
 
         // フレームにボタン・パネルを配置
         //getContentPane().add(btnWest, BorderLayout.WEST);  // 古い書き方
         //add(btnWest, BorderLayout.WEST);                     // 新しい書き方
-        add(drawPanel, BorderLayout.WEST);
+        add(pWest, BorderLayout.WEST);
         add(pCenter, BorderLayout.CENTER);
         add(pEast, BorderLayout.EAST);
         add(pNorth, BorderLayout.NORTH);
         add(pSouth, BorderLayout.SOUTH);
-
+        setJMenuBar(menuBar);
     }
 
     public void actionPerformed(ActionEvent e) {
         JLabel label = new JLabel("You pushed button.");
         JOptionPane.showMessageDialog(this, label);
+    }
+
+    public JMenuBar generateMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu subMenu = new JMenu("Sub");
+        JMenuItem subMenuItem1 = new JMenuItem("subItem1");
+        JMenuItem subMenuItem2 = new JMenuItem("subItem2");
+        JMenuItem subMenuItem3 = new JMenuItem("subItem3");
+        subMenu.add(subMenuItem1);
+        subMenu.add(subMenuItem2);
+        subMenu.add(subMenuItem3);
+
+        JMenu menu1 = new JMenu("MyApp");
+        JCheckBoxMenuItem menuItem1_1 = new JCheckBoxMenuItem("item1_1");
+        menuItem1_1.setSelected(true);
+        JMenuItem menuItem1_2 = new JMenuItem("item1_2");
+        JMenuItem menuItem1_3 = new JMenuItem("item1_3");
+        menuItem1_2.setEnabled(false);
+        JRadioButtonMenuItem menuItem1_4_1 = new JRadioButtonMenuItem("item1_4_1");
+        JRadioButtonMenuItem menuItem1_4_2 = new JRadioButtonMenuItem("item1_4_2");
+        JRadioButtonMenuItem menuItem1_4_3 = new JRadioButtonMenuItem("item1_4_3");
+        ButtonGroup group = new ButtonGroup();
+        group.add(menuItem1_4_1);
+        group.add(menuItem1_4_2);
+        group.add(menuItem1_4_3);
+        menu1.add(menuItem1_1);
+        menu1.add(subMenu);
+        menu1.add(menuItem1_2);
+        menu1.add(menuItem1_3);
+        menu1.addSeparator();
+        menu1.add(menuItem1_4_1);
+        menu1.add(menuItem1_4_2);
+        menu1.add(menuItem1_4_3);
+
+        JMenu menu2 = new JMenu("File");
+        JMenuItem menuItem2_1 = new JMenuItem("item2_1");
+        JMenuItem menuItem2_2 = new JMenuItem("item2_2");
+        JMenuItem menuItem2_3 = new JMenuItem("item2_3");
+        menu2.add(menuItem2_1);
+        menu2.add(menuItem2_2);
+        menu2.add(menuItem2_3);
+        menu2.setEnabled(false);
+        menuBar.add(menu1);
+        menuBar.add(menu2);
+        return menuBar;
     }
 }

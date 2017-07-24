@@ -71,11 +71,11 @@ public class SamplePanel4 extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        String newText = process(textArea.getText());
+        String newText = processInputText(textArea.getText());
         outputTextArea.setText(newText);
     }
 
-    private static String process(String input) {
+    private static String processInputText(String input) {
         java.util.List<String> lines = Arrays.asList(input.split("\n"));
         Collections.reverse(lines);
         return String.join("\n", lines);
