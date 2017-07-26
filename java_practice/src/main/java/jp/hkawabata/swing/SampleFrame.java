@@ -7,7 +7,9 @@ import java.awt.event.*;
 /**
  * Created by kawabatahiroto on 2017/07/23.
  */
-public class SampleFrame extends JFrame implements ActionListener {
+public class SampleFrame extends JFrame implements ActionListener, MouseListener {
+    JPopupMenu popup;
+
     public static void main(String[] args) {
         SampleFrame frame = new SampleFrame("タイトル");
         frame.setVisible(true);
@@ -62,6 +64,10 @@ public class SampleFrame extends JFrame implements ActionListener {
         // メニューバー作成
         JMenuBar menuBar = generateMenuBar();
 
+        // ポップアップメニュー作成
+        popup = generatePopupMenu();
+        pCenter.addMouseListener(this);
+
         // フレームにボタン・パネルを配置
         //getContentPane().add(btnWest, BorderLayout.WEST);  // 古い書き方
         //add(btnWest, BorderLayout.WEST);                     // 新しい書き方
@@ -77,6 +83,17 @@ public class SampleFrame extends JFrame implements ActionListener {
         JLabel label = new JLabel("You pushed button.");
         JOptionPane.showMessageDialog(this, label);
     }
+
+    public void mousePressed(MouseEvent e) {
+        if (e.isPopupTrigger()) {
+            popup.show(e.getComponent(), e.getX(), e.getY());
+        }
+    }
+    public void mouseClicked(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+    public void mouseExited(MouseEvent e){}
+    public void mouseReleased(MouseEvent e){}
+
 
     public JMenuBar generateMenuBar() {
         JMenuBar menuBar = new JMenuBar();
@@ -122,5 +139,14 @@ public class SampleFrame extends JFrame implements ActionListener {
         menuBar.add(menu1);
         menuBar.add(menu2);
         return menuBar;
+    }
+
+    public JPopupMenu generatePopupMenu() {
+        JPopupMenu popup = new JPopupMenu("ポップアップ");
+        JMenuItem menuItem1 = new JMenuItem("操作1");
+        JMenuItem menuItem2 = new JMenuItem("操作2");
+        popup.add(menuItem1);
+        popup.add(menuItem2);
+        return popup;
     }
 }
