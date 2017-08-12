@@ -53,9 +53,6 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
                 new JButton("South_2")
         };
 
-        // ボタンにイベントリスナーを登録
-        //btnWest.addActionListener(this);
-
         // パネル作成
         SamplePanel3 pNorth = new SamplePanel3();
         SamplePanel1 pSouth = new SamplePanel1(btnsSouth, Color.BLUE);
@@ -82,10 +79,6 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
     }
 
     public void actionPerformed(ActionEvent e) {
-        /*
-        JLabel label = new JLabel("You pushed button.");
-        JOptionPane.showMessageDialog(this, label);
-        */
         showListPanel();
     }
 
@@ -151,13 +144,43 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
         JFrame f = new JFrame();
         f.setSize(100, 100);
         String[] strArr = {"a", "iii", "uuuuu"};
-        Vector<String> strs = new Vector<String>();
+        Vector<String> strs = new Vector<>();
         strs.addAll(Arrays.asList(strArr));
-        JList<String> list = new JList<>(strs);
-        JButton btn = new JButton("ok");
-        f.add(list, BorderLayout.NORTH);
-        f.add(btn, BorderLayout.SOUTH);
+        DefaultListModel<String> model1 = new DefaultListModel<>();
+        DefaultListModel<String> model2 = new DefaultListModel<>();
+        model1.addElement("aaaaa");
+        model1.addElement("iiiii");
+        model1.addElement("uuuuu");
+        JList<String> list1 = new JList<>(model1);
+        JList<String> list2 = new JList<>(model2);
+        list1.addListSelectionListener(e -> {
+            // クリックをおした時と離したときとで2回呼ばれるので、一方でだけ処理するようにする
+            if (e.getValueIsAdjusting()) {
+                // （仮説）このケースのように選択と同時に消すと、「消す」処理によって再び選択状態が変化し、
+                // valueChanged メソッドがもう一度呼び出される
+                int i = list1.getSelectedIndex();
+                String s = list1.getSelectedValue();
+                if (i != -1) {
+                    model2.addElement(s);
+                    model1.removeElementAt(i);
+                }
+            }
+        });
+        list2.addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                int i = list2.getSelectedIndex();
+                String s = list2.getSelectedValue();
+                if (i != -1) {
+                    model1.addElement(s);
+                    model2.removeElementAt(i);
+                }
+            }
+        });
+        JButton btn = new JButton("閉じる");
         btn.addActionListener(e -> f.setVisible(false));
+        f.add(list1, BorderLayout.WEST);
+        f.add(list2, BorderLayout.EAST);
+        f.add(btn, BorderLayout.SOUTH);
         f.setVisible(true);
     }
 
