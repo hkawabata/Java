@@ -3,6 +3,8 @@ package jp.hkawabata.swing;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * Created by kawabatahiroto on 2017/07/23.
@@ -80,8 +82,11 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
     }
 
     public void actionPerformed(ActionEvent e) {
+        /*
         JLabel label = new JLabel("You pushed button.");
         JOptionPane.showMessageDialog(this, label);
+        */
+        showListPanel();
     }
 
     public void mousePressed(MouseEvent e) {
@@ -102,6 +107,7 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
         JMenuItem subMenuItem1 = new JMenuItem("subItem1");
         JMenuItem subMenuItem2 = new JMenuItem("subItem2");
         JMenuItem subMenuItem3 = new JMenuItem("subItem3");
+        subMenuItem3.addActionListener(this);
         subMenu.add(subMenuItem1);
         subMenu.add(subMenuItem2);
         subMenu.add(subMenuItem3);
@@ -139,6 +145,20 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
         menuBar.add(menu1);
         menuBar.add(menu2);
         return menuBar;
+    }
+
+    public void showListPanel() {
+        JFrame f = new JFrame();
+        f.setSize(100, 100);
+        String[] strArr = {"a", "iii", "uuuuu"};
+        Vector<String> strs = new Vector<String>();
+        strs.addAll(Arrays.asList(strArr));
+        JList<String> list = new JList<>(strs);
+        JButton btn = new JButton("ok");
+        f.add(list, BorderLayout.NORTH);
+        f.add(btn, BorderLayout.SOUTH);
+        btn.addActionListener(e -> f.setVisible(false));
+        f.setVisible(true);
     }
 
     public JPopupMenu generatePopupMenu() {

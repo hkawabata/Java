@@ -29,7 +29,7 @@ public class SamplePanel3 extends JPanel implements ActionListener {
         textLabel = new JLabel("ラベル");
         textLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 12));
         textLabel.setPreferredSize(new Dimension(80, 60));
-        textLabel.setBorder(new TitledBorder("hoge"));
+        textLabel.setBorder(new TitledBorder("showListPanel"));
         textLabel.setHorizontalAlignment(JLabel.LEFT);
         textLabel.setVerticalAlignment(JLabel.TOP);
 
