@@ -45,7 +45,10 @@ public class Tetris {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            mainFrame.gPanel.shiftBlock(Block.Direction.DOWN);
+            boolean downResult = mainFrame.gPanel.shiftBlock(Block.Direction.DOWN);
+            if (!downResult) {
+                mainFrame.gPanel.addBlock();
+            }
         }
     }
 }

@@ -32,12 +32,15 @@ public class GraphicPanel extends JPanel implements KeyListener {
         drawBlock();
     }
 
-    public void shiftBlock(Direction d) {
+    public boolean shiftBlock(Direction d) {
         if (isShiftable(d)) {
             clearBlock();
             blk.shift(d);
             drawBlock();
             paintComponent(getGraphics());
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -87,7 +90,8 @@ public class GraphicPanel extends JPanel implements KeyListener {
         }
         boolean ret = true;
         for (int newPos[]: newPositions) {
-            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX && newPos[1] < blockNumY;
+            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX &&
+                    0 <= newPos[1] && newPos[1] < blockNumY;
         }
         return ret;
     }

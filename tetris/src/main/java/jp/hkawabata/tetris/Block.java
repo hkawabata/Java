@@ -8,12 +8,6 @@ import java.util.Random;
  * Created by kawabatahiroto on 2017/08/19.
  */
 public class Block {
-    /*
-    public int xPositions[];
-    public int yPositions[];
-    public int xCenter;
-    public int yCenter;
-    */
     public int positions[][];
     public int center[];
     public Color color;
@@ -43,14 +37,17 @@ public class Block {
 
     public Block() {
         int blkId = Math.abs(random.nextInt()) % positionsCandidates.length;
-        positions = positionsCandidates[blkId];
-        center = centerCandidates[blkId];
+
+        positions = new int[positionsCandidates[blkId].length][2];
+        for (int i = 0; i < positionsCandidates[blkId].length; i++) {
+            positions[i][0] = positionsCandidates[blkId][i][0];
+            positions[i][1] = positionsCandidates[blkId][i][1];
+        }
+        center = new int[]{centerCandidates[blkId][0], centerCandidates[blkId][1]};
         color = colorCandidates[blkId];
     }
 
     public void shift(Direction d) {
-        // TODO: そっちには動けません判定
-        // TODO: 下に shift しようとしてもうこれ以上動けない場合、ステータスを返すか何かして次のブロック投入のトリガーにする
         switch (d) {
             case RIGHT:
                 for (int i = 0; i < positions.length; i++) {
@@ -74,7 +71,6 @@ public class Block {
     }
 
     public void rotate() {
-        // TODO: 回転できません判定
         for (int i = 0; i < positions.length; i++) {
             int xTmp = positions[i][0];
             int yTmp = positions[i][1];
