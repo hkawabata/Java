@@ -66,11 +66,7 @@ public class GraphicPanel extends JPanel implements KeyListener {
                 }
                 break;
         }
-        boolean ret = true;
-        for (int newPos[]: newPositions) {
-            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX && newPos[1] < blockNumY;
-        }
-        return ret;
+        return isValidNewPosition(newPositions);
     }
 
     public void rotateBlock() {
@@ -88,10 +84,23 @@ public class GraphicPanel extends JPanel implements KeyListener {
             newPositions[i][0] = -blk.positions[i][1] + blk.center[1] + blk.center[0];
             newPositions[i][1] = blk.positions[i][0] - blk.center[0] + blk.center[1];
         }
+        return isValidNewPosition(newPositions);
+    }
+
+    private boolean isValidNewPosition(int newPositions[][]) {
         boolean ret = true;
         for (int newPos[]: newPositions) {
-            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX &&
-                    0 <= newPos[1] && newPos[1] < blockNumY;
+            // 壁を貫通しないかチェック
+            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX && newPos[1] < blockNumY;
+            if (ret && !colors[newPos[0]][newPos[1]].equals(bgColor)) {
+                // 壁貫通はないが、移動先にすでにブロックがあるとき
+                // 移動前の自分自身と重なる場合のみ OK
+                boolean isOverlap = false;
+                for (int pos[] : blk.positions) {
+                    isOverlap = isOverlap || (newPos[0] == pos[0] && newPos[1] == pos[1]);
+                }
+                ret = isOverlap;
+            }
         }
         return ret;
     }
