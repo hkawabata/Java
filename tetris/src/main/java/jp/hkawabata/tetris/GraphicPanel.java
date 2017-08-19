@@ -42,25 +42,30 @@ public class GraphicPanel extends JPanel implements KeyListener {
     }
 
     public boolean isShiftable(Direction d) {
-        boolean ret = true;
+        int newPositions[][] = new int[blk.positions.length][2];
         switch (d) {
             case LEFT:
-                for (int pos[]: blk.positions) {
-                    ret = ret && 0 <= pos[0] - 1 &&
-                            pos[0] - 1 < blockNumX;
+                for (int i = 0; i < blk.positions.length; i++) {
+                    newPositions[i][0] = blk.positions[i][0] - 1;
+                    newPositions[i][1] = blk.positions[i][1];
                 }
                 break;
             case RIGHT:
-                for (int pos[]: blk.positions) {
-                    ret = ret && 0 <= pos[0] + 1 &&
-                            pos[0] + 1 < blockNumX;
+                for (int i = 0; i < blk.positions.length; i++) {
+                    newPositions[i][0] = blk.positions[i][0] + 1;
+                    newPositions[i][1] = blk.positions[i][1];
                 }
                 break;
             case DOWN:
-                for (int pos[]: blk.positions) {
-                    ret = ret && pos[1] + 1 < blockNumY;
+                for (int i = 0; i < blk.positions.length; i++) {
+                    newPositions[i][0] = blk.positions[i][0];
+                    newPositions[i][1] = blk.positions[i][1] + 1;
                 }
                 break;
+        }
+        boolean ret = true;
+        for (int newPos[]: newPositions) {
+            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX && newPos[1] < blockNumY;
         }
         return ret;
     }
@@ -75,7 +80,16 @@ public class GraphicPanel extends JPanel implements KeyListener {
     }
 
     public boolean isRotatable() {
-        return true;
+        int newPositions[][] = new int[blk.positions.length][2];
+        for (int i = 0; i < blk.positions.length; i++) {
+            newPositions[i][0] = -blk.positions[i][1] + blk.center[1] + blk.center[0];
+            newPositions[i][1] = blk.positions[i][0] - blk.center[0] + blk.center[1];
+        }
+        boolean ret = true;
+        for (int newPos[]: newPositions) {
+            ret = ret && 0 <= newPos[0] && newPos[0] < blockNumX && newPos[1] < blockNumY;
+        }
+        return ret;
     }
 
     GraphicPanel(Properties prop) {

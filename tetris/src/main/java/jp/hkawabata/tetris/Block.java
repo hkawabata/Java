@@ -51,48 +51,36 @@ public class Block {
     public void shift(Direction d) {
         // TODO: そっちには動けません判定
         // TODO: 下に shift しようとしてもうこれ以上動けない場合、ステータスを返すか何かして次のブロック投入のトリガーにする
-        if (isShiftable(d)) {
-            switch (d) {
-                case RIGHT:
-                    for (int i = 0; i < positions.length; i++) {
-                        positions[i][0] += 1;
-                    }
-                    center[0] += 1;
-                    break;
-                case LEFT:
-                    for (int i = 0; i < positions.length; i++) {
-                        positions[i][0] -= 1;
-                    }
-                    center[0] -= 1;
-                    break;
-                case DOWN:
-                    for (int i = 0; i < positions.length; i++) {
-                        positions[i][1] += 1;
-                    }
-                    center[1] += 1;
-                    break;
-            }
+        switch (d) {
+            case RIGHT:
+                for (int i = 0; i < positions.length; i++) {
+                    positions[i][0] += 1;
+                }
+                center[0] += 1;
+                break;
+            case LEFT:
+                for (int i = 0; i < positions.length; i++) {
+                    positions[i][0] -= 1;
+                }
+                center[0] -= 1;
+                break;
+            case DOWN:
+                for (int i = 0; i < positions.length; i++) {
+                    positions[i][1] += 1;
+                }
+                center[1] += 1;
+                break;
         }
-    }
-
-    public boolean isShiftable(Direction d) {
-        return true;
     }
 
     public void rotate() {
         // TODO: 回転できません判定
-        if (isRotatable()) {
-            for (int i = 0; i < positions.length; i++) {
-                int xTmp = positions[i][0];
-                int yTmp = positions[i][1];
-                positions[i][0] = -yTmp + center[1] + center[0];
-                positions[i][1] = xTmp - center[0] + center[1];
-            }
+        for (int i = 0; i < positions.length; i++) {
+            int xTmp = positions[i][0];
+            int yTmp = positions[i][1];
+            positions[i][0] = -yTmp + center[1] + center[0];
+            positions[i][1] = xTmp - center[0] + center[1];
         }
-    }
-
-    public boolean isRotatable() {
-        return true;
     }
 
     public enum Direction {LEFT, RIGHT, DOWN}
