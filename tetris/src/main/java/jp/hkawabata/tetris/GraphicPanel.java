@@ -1,7 +1,10 @@
 package jp.hkawabata.tetris;
 
+import jp.hkawabata.tetris.Block.Direction;
+
 import javax.swing.*;
 import java.awt.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Properties;
@@ -29,18 +32,50 @@ public class GraphicPanel extends JPanel implements KeyListener {
         drawBlock();
     }
 
-    public void shiftBlock(Block.Direction d) {
-        clearBlock();
-        blk.shift(d);
-        drawBlock();
-        paintComponent(getGraphics());
+    public void shiftBlock(Direction d) {
+        if (isShiftable(d)) {
+            clearBlock();
+            blk.shift(d);
+            drawBlock();
+            paintComponent(getGraphics());
+        }
+    }
+
+    public boolean isShiftable(Direction d) {
+        boolean ret = true;
+        switch (d) {
+            case LEFT:
+                for (int pos[]: blk.positions) {
+                    ret = ret && 0 <= pos[0] - 1 &&
+                            pos[0] - 1 < blockNumX;
+                }
+                break;
+            case RIGHT:
+                for (int pos[]: blk.positions) {
+                    ret = ret && 0 <= pos[0] + 1 &&
+                            pos[0] + 1 < blockNumX;
+                }
+                break;
+            case DOWN:
+                for (int pos[]: blk.positions) {
+                    ret = ret && pos[1] + 1 < blockNumY;
+                }
+                break;
+        }
+        return ret;
     }
 
     public void rotateBlock() {
-        clearBlock();
-        blk.rotate();
-        drawBlock();
-        paintComponent(getGraphics());
+        if (isRotatable()) {
+            clearBlock();
+            blk.rotate();
+            drawBlock();
+            paintComponent(getGraphics());
+        }
+    }
+
+    public boolean isRotatable() {
+        return true;
     }
 
     GraphicPanel(Properties prop) {
@@ -98,13 +133,13 @@ public class GraphicPanel extends JPanel implements KeyListener {
                 rotateBlock();
                 break;
             case KeyEvent.VK_DOWN:
-                shiftBlock(Block.Direction.DOWN);
+                shiftBlock(Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                shiftBlock(Block.Direction.LEFT);
+                shiftBlock(Direction.LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                shiftBlock(Block.Direction.RIGHT);
+                shiftBlock(Direction.RIGHT);
                 break;
         }
     }
