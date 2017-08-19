@@ -13,6 +13,7 @@ import java.util.Random;
 public class Tetris {
     static MainFrame mainFrame;
     static Random random = new Random();
+    static int score = 0;
 
     public static void main(String[] args) {
         // 設定ファイル読み込み
@@ -47,6 +48,8 @@ public class Tetris {
             }
             boolean downResult = mainFrame.gPanel.shiftBlock(Block.Direction.DOWN);
             if (!downResult) {
+                score += mainFrame.gPanel.check();
+                mainFrame.label.setText(Integer.toString(score));
                 mainFrame.gPanel.addBlock();
             }
         }

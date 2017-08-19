@@ -154,6 +154,30 @@ public class GraphicPanel extends JPanel implements KeyListener {
         }
     }
 
+    public int check() {
+        int cntFilledLines = 0;
+        for (int y = 0; y < blockNumY; y++) {
+            boolean isFilledLine = true;
+            for (int x = 0; x < blockNumX; x++) {
+                isFilledLine = isFilledLine && !colors[x][y].equals(bgColor);
+            }
+            if (isFilledLine) {
+                cntFilledLines++;
+                for (int x = 0; x < blockNumX; x++) {
+                    colors[x][y] = bgColor;
+                }
+                for (int y_ = y; y_ > 0; y_--) for (int x = 0; x < blockNumX; x++) {
+                    colors[x][y_] = colors[x][y_ - 1];
+                }
+                for (int x = 0; x < blockNumX; x++) {
+                    colors[x][0] = bgColor;
+                }
+            }
+        }
+        paintComponent(getGraphics());
+        return cntFilledLines * (cntFilledLines + 1) * 1000 / 2;
+    }
+
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_UP:

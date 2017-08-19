@@ -15,6 +15,7 @@ import java.util.Properties;
  */
 public class MainFrame extends JFrame {
     GraphicPanel gPanel;
+    JLabel label;
 
     MainFrame(Properties prop) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -25,7 +26,7 @@ public class MainFrame extends JFrame {
 
         gPanel = new GraphicPanel(prop);
         JButton btn = new JButton("hoge");
-        JLabel label = new JLabel("fuga");
+        label = new JLabel("0");
         add(gPanel, BorderLayout.CENTER);
         add(btn, BorderLayout.SOUTH);
         add(label, BorderLayout.NORTH);
