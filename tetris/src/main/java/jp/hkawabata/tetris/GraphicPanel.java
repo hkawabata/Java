@@ -1,8 +1,5 @@
 package jp.hkawabata.tetris;
 
-import jp.hkawabata.tetris.block.Block1;
-import jp.hkawabata.tetris.block.IBlock;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -21,18 +18,18 @@ public class GraphicPanel extends JPanel implements KeyListener {
     private Color[][] colors;
     private Color bgColor = Color.BLACK;
 
-    public IBlock blk;
+    public Block blk;
 
     public void setColor(int x, int y, Color color) {
         colors[x][y] = color;
     }
 
     public void addBlock() {
-        blk = new Block1();
+        blk = new Block();
         drawBlock();
     }
 
-    public void shiftBlock(IBlock.Direction d) {
+    public void shiftBlock(Block.Direction d) {
         clearBlock();
         blk.shift(d);
         drawBlock();
@@ -84,14 +81,14 @@ public class GraphicPanel extends JPanel implements KeyListener {
     }
 
     public void clearBlock() {
-        for(int i = 0; i < blk.xPositions.length; i++) {
-            setColor(blk.xPositions[i], blk.yPositions[i], bgColor);
+        for(int i = 0; i < blk.positions.length; i++) {
+            setColor(blk.positions[i][0], blk.positions[i][1], bgColor);
         }
     }
 
     public void drawBlock() {
-        for(int i = 0; i < blk.xPositions.length; i++) {
-            setColor(blk.xPositions[i], blk.yPositions[i], blk.color);
+        for(int i = 0; i < blk.positions.length; i++) {
+            setColor(blk.positions[i][0], blk.positions[i][1], blk.color);
         }
     }
 
@@ -101,13 +98,13 @@ public class GraphicPanel extends JPanel implements KeyListener {
                 rotateBlock();
                 break;
             case KeyEvent.VK_DOWN:
-                shiftBlock(IBlock.Direction.DOWN);
+                shiftBlock(Block.Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                shiftBlock(IBlock.Direction.LEFT);
+                shiftBlock(Block.Direction.LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                shiftBlock(IBlock.Direction.RIGHT);
+                shiftBlock(Block.Direction.RIGHT);
                 break;
         }
     }

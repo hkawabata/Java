@@ -1,7 +1,5 @@
 package jp.hkawabata.tetris;
 
-import jp.hkawabata.tetris.block.IBlock;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -47,7 +45,7 @@ public class Tetris {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            mainFrame.gPanel.shiftBlock(IBlock.Direction.DOWN);
+            mainFrame.gPanel.shiftBlock(Block.Direction.DOWN);
         }
     }
 }
