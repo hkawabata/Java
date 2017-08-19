@@ -21,6 +21,7 @@ public class SamplePanel3 extends JPanel implements ActionListener {
     JLabel imageLabel;
     JLabel imageTextLabel;
     JPasswordField passwordField;
+    JSplitPane splitpane;
 
     SamplePanel3() {
         setBackground(Color.ORANGE);
@@ -66,12 +67,28 @@ public class SamplePanel3 extends JPanel implements ActionListener {
         passwordField = new JPasswordField(10);
         passwordField.setEchoChar('★');
 
+        splitpane = new JSplitPane();
+        JPanel p1 = new JPanel();
+        JPanel p2 = new JPanel();
+        p1.add(textLabel);
+        p1.add(textField);
+        p1.add(btn);
+        p2.add(imageLabel);
+        p2.add(imageTextLabel);
+        p2.add(passwordField);
+        splitpane.setLeftComponent(p1);
+        splitpane.setRightComponent(p2);
+
+        add(splitpane);
+
+        /*
         add(textLabel);
         add(textField);
         add(btn);
         add(imageLabel);
         add(imageTextLabel);
         add(passwordField);
+        */
     }
 
     public void actionPerformed(ActionEvent e) {

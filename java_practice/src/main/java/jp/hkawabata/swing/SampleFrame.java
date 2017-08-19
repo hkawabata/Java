@@ -11,10 +11,28 @@ import java.util.Vector;
  */
 public class SampleFrame extends JFrame implements ActionListener, MouseListener {
     JPopupMenu popup;
+    SamplePanel3 pNorth;
+    SamplePanel1 pSouth;
+    SamplePanel3 pSouth2;
+    SamplePanel2 pEast;
+    SamplePanel4 pCenter;
+    SamplePanel5 pWest;
+    JTabbedPane tabbedpane;
 
     public static void main(String[] args) {
         SampleFrame frame = new SampleFrame("タイトル");
         frame.setVisible(true);
+
+        int cnt = 0;
+        while(frame.isVisible()) {
+            try {
+                cnt++;
+                frame.pWest.randomPaint();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     SampleFrame(String title) {
@@ -54,11 +72,18 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
         };
 
         // パネル作成
-        SamplePanel3 pNorth = new SamplePanel3();
-        SamplePanel1 pSouth = new SamplePanel1(btnsSouth, Color.BLUE);
-        SamplePanel2 pEast = new SamplePanel2(btnsEast);
-        SamplePanel4 pCenter = new SamplePanel4();
-        SamplePanel5 pWest = new SamplePanel5();
+        pNorth = new SamplePanel3();
+        pSouth = new SamplePanel1(btnsSouth, Color.BLUE);
+        pSouth2 = new SamplePanel3();
+        pEast = new SamplePanel2(btnsEast);
+        pCenter = new SamplePanel4();
+        pWest = new SamplePanel5();
+
+        // tabbed pane 作成
+        tabbedpane = new JTabbedPane(JTabbedPane.BOTTOM);
+        tabbedpane.addTab("tab1", pSouth);
+        tabbedpane.addTab("tab2", null, pSouth2, "this is tab2");
+        tabbedpane.setBackgroundAt(1, Color.ORANGE);
 
         // メニューバー作成
         JMenuBar menuBar = generateMenuBar();
@@ -74,7 +99,7 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
         add(pCenter, BorderLayout.CENTER);
         add(pEast, BorderLayout.EAST);
         add(pNorth, BorderLayout.NORTH);
-        add(pSouth, BorderLayout.SOUTH);
+        add(tabbedpane, BorderLayout.SOUTH);
         setJMenuBar(menuBar);
     }
 
@@ -143,14 +168,13 @@ public class SampleFrame extends JFrame implements ActionListener, MouseListener
     public void showListPanel() {
         JFrame f = new JFrame();
         f.setSize(100, 100);
-        String[] strArr = {"a", "iii", "uuuuu"};
-        Vector<String> strs = new Vector<>();
-        strs.addAll(Arrays.asList(strArr));
         DefaultListModel<String> model1 = new DefaultListModel<>();
         DefaultListModel<String> model2 = new DefaultListModel<>();
         model1.addElement("aaaaa");
         model1.addElement("iiiii");
         model1.addElement("uuuuu");
+        model1.addElement("eeeee");
+        model1.addElement("ooooo");
         JList<String> list1 = new JList<>(model1);
         JList<String> list2 = new JList<>(model2);
         list1.addListSelectionListener(e -> {

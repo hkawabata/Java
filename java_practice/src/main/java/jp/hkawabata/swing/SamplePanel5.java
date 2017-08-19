@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 /**
  * Created by kawabatahiroto on 2017/07/23.
@@ -13,6 +14,7 @@ public class SamplePanel5 extends JPanel implements ActionListener {
     static int blockSize = 10;
     static int blockNumX = 8;
     static int blockNumY = 10;
+    Random random = new Random();
 
     Color[][] colors = new Color[blockNumX][blockNumY];
 
@@ -29,10 +31,15 @@ public class SamplePanel5 extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        colors[1][3] = Color.RED;
-        colors[1][5] = Color.RED;
-        colors[3][7] = Color.RED;
-        colors[3][8] = Color.RED;
+        randomPaint();
+    }
+
+    public void randomPaint() {
+        for (int i = 0; i < 5; i++) {
+            int x = Math.abs(random.nextInt());
+            int y = Math.abs(random.nextInt());
+            colors[x % blockNumX][y % blockNumY] = Color.RED;
+        }
         paintComponent(getGraphics());
     }
 
