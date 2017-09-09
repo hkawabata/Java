@@ -2,6 +2,7 @@ package jp.hkawabata.mockito;
 
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
+import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -109,5 +110,46 @@ public class MockitoTest {
         // 一部のメソッドのみ実際の実装を適用
         when(conMock.hoge()).thenCallRealMethod();
         assertThat(conMock.hoge(), is("hoge"));
+    }
+
+    /**
+     * 呼び出し回数の検証
+     */
+    @Test
+    public void verifyMockitoTest() {
+        MyDBConnector conMock = mock(MyDBConnector.class);
+        when(conMock.getMySQLRecord(anyString())).thenReturn("record-any");
+        when(conMock.getMySQLRecord("sql")).thenReturn("record-sql");
+        System.out.println(conMock.getMySQLRecord("hoge"));
+        System.out.println(conMock.getMySQLRecord("sql"));
+        System.out.println(conMock.getMySQLRecord("fuga"));
+        System.out.println(conMock.getMySQLRecord("fuga"));
+        System.out.println(conMock.getMySQLRecord("fuga"));
+        verify(conMock, times(5)).getMySQLRecord(anyString());
+        verify(conMock, times(1)).getMySQLRecord("sql");
+        verify(conMock, times(3)).getMySQLRecord("fuga");
+        verify(conMock, atLeast(2)).getMySQLRecord("fuga");
+        verify(conMock, atMost(4)).getMySQLRecord("fuga");
+        verify(conMock, never()).getMySQLRecord("never");
+    }
+
+    /**
+     * 呼び出し順序の検証
+     */
+    @Test
+    public void inOrderMockitoTest() {
+        MyDBConnector conMock1 = mock(MyDBConnector.class);
+        MyDBConnector conMock2 = spy(MyDBConnector.class);
+        System.out.println(conMock1.getMySQLRecord("sql1"));
+        System.out.println(conMock2.hoge());
+        System.out.println(conMock1.hoge());
+        System.out.println(conMock2.getMySQLRecord("sql2"));
+        System.out.println(conMock1.hoge());
+
+        // 順序を検証したいメソッド以外は記述しなくて良い
+        InOrder io = inOrder(conMock1, conMock2);
+        io.verify(conMock1).getMySQLRecord("sql1");
+        io.verify(conMock1).hoge();
+        io.verify(conMock2).getMySQLRecord("sql2");
     }
 }
