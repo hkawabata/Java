@@ -101,4 +101,13 @@ public class MockitoTest {
         assertThat(conMock.getMySQLRecord("hoge"), is("3"));
         conMock.getMySQLRecord("hoge");
     }
+
+    @Test
+    public void callRealMethodMockitoTest() {
+        MyDBConnector conMock = mock(MyDBConnector.class);
+        assertThat(conMock.hoge(), nullValue());
+        // 一部のメソッドのみ実際の実装を適用
+        when(conMock.hoge()).thenCallRealMethod();
+        assertThat(conMock.hoge(), is("hoge"));
+    }
 }
