@@ -2,6 +2,11 @@ package jp.hkawabata.mockito;
 
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 import static org.mockito.Matchers.anyInt;
@@ -68,5 +73,32 @@ public class MockitoTest {
         assertThat(con.hogeFuga(), is("hoge-fuga"));
         doReturn("hoge-spy").when(con).hoge();
         assertThat(con.hogeFuga(), is("hoge-spy-fuga"));
+    }
+
+    @Test
+    public void callbackAnswerMockitoTest() {
+        MyDBConnector conMock = mock(MyDBConnector.class);
+        doAnswer(new Answer() {
+            public Object answer(InvocationOnMock invocation) {
+                Object args[] = invocation.getArguments();
+                return "record-" + args[0];
+            }
+        }).when(conMock).getMySQLRecord(anyString());
+        assertThat(conMock.getMySQLRecord("hoge"), is("record-hoge"));
+        assertThat(conMock.getMySQLRecord("fuga"), is("record-fuga"));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void iteratorMockitoTest() {
+        MyDBConnector conMock = mock(MyDBConnector.class);
+        when(conMock.getMySQLRecord(anyString()))
+                .thenReturn("1")
+                .thenReturn("2")
+                .thenReturn("3")
+                .thenThrow(new NoSuchElementException());
+        assertThat(conMock.getMySQLRecord("hoge"), is("1"));
+        assertThat(conMock.getMySQLRecord("hoge"), is("2"));
+        assertThat(conMock.getMySQLRecord("hoge"), is("3"));
+        conMock.getMySQLRecord("hoge");
     }
 }
