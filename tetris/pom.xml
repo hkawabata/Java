@@ -5,8 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hkawabata</groupId>
-    <artifactId>tetris</artifactId>
+    <artifactId>swing</artifactId>
     <version>1.0-SNAPSHOT</version>
-
 
 </project>
