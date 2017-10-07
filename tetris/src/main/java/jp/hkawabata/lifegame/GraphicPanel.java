@@ -35,7 +35,7 @@ public class GraphicPanel extends JPanel {
         for (int i = 0; i < blockNumX; i++) for (int j = 0; j < blockNumY; j++) {
             drawSquare(g, i, j);
         }
-        drawLines(g);
+        //drawLines(g);
     }
 
     public void drawLines(Graphics g) {
