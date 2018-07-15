@@ -15,11 +15,11 @@ public class ZooKeeperWatcher {
         this.zk = new ZooKeeper(zkHost, 5000,
                 new Watcher() {
                     public void process(WatchedEvent event) {
+                        System.out.println(event.toString());
                         // ウォッチしている znode の値が変更されたら
                         // 再フェッチして変数の値を更新
                         if(event.getType() == Event.EventType.NodeDataChanged) {
                             try {
-                                System.out.println(event.toString());
                                 zkData = new String(zk.getData(znode, true, null));
                             } catch (KeeperException | InterruptedException e) {
                                 e.printStackTrace();
