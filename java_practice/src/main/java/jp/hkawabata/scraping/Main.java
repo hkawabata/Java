@@ -22,9 +22,10 @@ public class Main {
         // ヘッドレスブラウザ（GUI なし）
         WebDriver headLessDriver = new ChromeDriver(new ChromeOptions().setHeadless(true));
         try {
-            app1(guiDriver);
+            //app1(guiDriver);
+            app2(guiDriver);
         } catch (Exception e) {
-            throw new Exception(e.toString());
+            throw new Exception(e.toString(), e);
         } finally {
             guiDriver.quit();
             headLessDriver.quit();
@@ -40,13 +41,30 @@ public class Main {
     private static void app1(WebDriver driver) throws InterruptedException {
         driver.get("http://www.google.com/xhtml");
         // ユーザが画面を確認できるように数秒間待機
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.sendKeys("ChromeDriver");
         searchBox.submit();
         // ユーザが画面を確認できるように数秒間待機
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         // ウインドウを閉じる
         driver.close();
+    }
+
+    /**
+     * Wikipedia トップページを開き、英語版ページに飛び、"Random Article" のリンクを複数回クリックする
+     *
+     * @param driver
+     * @throws InterruptedException
+     */
+    public static void app2(WebDriver driver) throws InterruptedException {
+        driver.get("https://www.wikipedia.org");
+        Thread.sleep(2000);
+        driver.findElement(By.id("js-link-box-en")).click();
+        Thread.sleep(2000);
+        for (int i = 0; i < 5; i++) {
+            driver.findElement(By.id("n-randompage")).click();
+            Thread.sleep(1000);
+        }
     }
 }
