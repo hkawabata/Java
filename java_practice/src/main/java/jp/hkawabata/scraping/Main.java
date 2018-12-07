@@ -17,30 +17,36 @@ public class Main {
         // 以下は Mac の例（デフォルトなのか、指定しなくても動いた）
         //System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
-        // 通常の Chrome ブラウザ
-        WebDriver driver = new ChromeDriver();
-        // ヘッドレスブラウザ（ウインドウが開かない）
+        // 通常のChrome ブラウザ（GUI あり）
+        WebDriver guiDriver = new ChromeDriver();
+        // ヘッドレスブラウザ（GUI なし）
         WebDriver headLessDriver = new ChromeDriver(new ChromeOptions().setHeadless(true));
         try {
-            app1(driver);
+            app1(guiDriver);
         } catch (Exception e) {
             throw new Exception(e.toString());
+        } finally {
+            guiDriver.quit();
+            headLessDriver.quit();
         }
     }
 
     /**
      * Google トップページを開き、キーワードで検索する
      *
-     * @param driver
+     * @param driver webdriver
      * @throws InterruptedException
      */
     private static void app1(WebDriver driver) throws InterruptedException {
         driver.get("http://www.google.com/xhtml");
-        Thread.sleep(3000);  // ユーザが画面を眺めるための時間
+        // ユーザが画面を確認できるように数秒間待機
+        Thread.sleep(3000);
         WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.sendKeys("ChromeDriver");
         searchBox.submit();
-        Thread.sleep(3000);  // ユーザが画面を眺めるための時間
-        driver.quit();
+        // ユーザが画面を確認できるように数秒間待機
+        Thread.sleep(3000);
+        // ウインドウを閉じる
+        driver.close();
     }
 }
