@@ -12,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
  */
 public class Main {
 
+    private static final long WAIT_TIME_MILLIS = 2000;
+
     public static void main(String[] args) throws Exception {
         // 必要に応じて chromedriver のパスを指定（chromedriver は別でインストールが必要）
         // 以下は Mac の例（デフォルトなのか、指定しなくても動いた）
@@ -41,12 +43,12 @@ public class Main {
     private static void app1(WebDriver driver) throws InterruptedException {
         driver.get("http://www.google.com/xhtml");
         // ユーザが画面を確認できるように数秒間待機
-        Thread.sleep(2000);
+        Thread.sleep(WAIT_TIME_MILLIS);
         WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.sendKeys("ChromeDriver");
         searchBox.submit();
         // ユーザが画面を確認できるように数秒間待機
-        Thread.sleep(2000);
+        Thread.sleep(WAIT_TIME_MILLIS);
         // ウインドウを閉じる
         driver.close();
     }
@@ -54,17 +56,17 @@ public class Main {
     /**
      * Wikipedia トップページを開き、英語版ページに飛び、"Random Article" のリンクを複数回クリックする
      *
-     * @param driver
+     * @param driver webdriver
      * @throws InterruptedException
      */
     public static void app2(WebDriver driver) throws InterruptedException {
         driver.get("https://www.wikipedia.org");
-        Thread.sleep(2000);
+        Thread.sleep(WAIT_TIME_MILLIS);
         driver.findElement(By.id("js-link-box-en")).click();
-        Thread.sleep(2000);
+        Thread.sleep(WAIT_TIME_MILLIS);
         for (int i = 0; i < 5; i++) {
             driver.findElement(By.id("n-randompage")).click();
-            Thread.sleep(1000);
+            Thread.sleep(WAIT_TIME_MILLIS);
         }
     }
 }
